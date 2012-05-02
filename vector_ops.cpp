@@ -1,14 +1,11 @@
 
-/*
- * Implementation of all vector operations.
- */
-
+// Implementation of all vector operations.
 
 /*
  * Vector eqaulity.
  */
 template <class T>
-bool operator==(vector<T> const &v, vector<T> const &w)
+bool operator==(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		return false;
@@ -28,12 +25,12 @@ bool operator==(vector<T> const &v, vector<T> const &w)
  * Scalar multiplication.
  */
 template <class T>
-vector<T> operator*(T s, vector<T> const &v)
+vector<T> operator*(T s, const vector<T> &v)
 {
 	vector<T> result(v.size());
 	
 	for (int i = 0; i < v.size(); ++i) {
-		result = s * v(i);
+		result(i) = s * v(i);
 	}
 	
 	return result;
@@ -41,7 +38,7 @@ vector<T> operator*(T s, vector<T> const &v)
 
 // For commutivity.
 template <class T>
-vector<T> operator*(vector<T> const &v, T s)
+vector<T> operator*(const vector<T> &v, T s)
 {
 	return s * v;
 }
@@ -51,7 +48,7 @@ vector<T> operator*(vector<T> const &v, T s)
  * Scalar division.
  */
 template <class T>
-vector<T> operator/(vector<T> const &v, T s)
+vector<T> operator/(const vector<T> &v, T s)
 {
 	if (s == 0) {
 		// TODO: Throw invalid argument exception.
@@ -60,7 +57,7 @@ vector<T> operator/(vector<T> const &v, T s)
 	vector<T> result(v.size());
 	
 	for (int i = 0; i < v.size(); ++i) {
-		result = v(i) / s;
+		result(i) = v(i) / s;
 	}
 	
 	return result;
@@ -71,7 +68,7 @@ vector<T> operator/(vector<T> const &v, T s)
  * Vector addition.
  */
 template <class T>
-vector<T> operator+(vector<T> const &v, vector<T> const &w)
+vector<T> operator+(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		// TODO: Throw invalid argument exception.
@@ -80,7 +77,7 @@ vector<T> operator+(vector<T> const &v, vector<T> const &w)
 	vector<T> result(v.size());
 	
 	for (int i = 0; i < v.size(); ++i) {
-		result = v(i) + w(i);
+		result(i) = v(i) + w(i);
 	}
 	
 	return result;
@@ -91,7 +88,7 @@ vector<T> operator+(vector<T> const &v, vector<T> const &w)
  * Vector subtraction.
  */
 template <class T>
-vector<T> operator-(vector<T> const &v, vector<T> const &w)
+vector<T> operator-(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		// TODO: Throw invalid argument exception.
@@ -100,7 +97,7 @@ vector<T> operator-(vector<T> const &v, vector<T> const &w)
 	vector<T> result(v.size());
 	
 	for (int i = 0; i < v.size(); ++i) {
-		result = v(i) - w(i);
+		result(i) = v(i) - w(i);
 	}
 	
 	return result;
@@ -111,7 +108,7 @@ vector<T> operator-(vector<T> const &v, vector<T> const &w)
  * Accumulated vector addition.
  */
 template <class T>
-vector<T> operator+=(vector<T> &v, vector<T> const &w)
+vector<T>& operator+=(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		// TODO: Throw invalid argument exception.
@@ -120,6 +117,8 @@ vector<T> operator+=(vector<T> &v, vector<T> const &w)
 	for (int i = 0; i < v.size(); ++i) {
 		v(i) += w(i);
 	}
+
+	return v;
 }
 	
 
@@ -127,7 +126,7 @@ vector<T> operator+=(vector<T> &v, vector<T> const &w)
  * Accumulated vector subtraction.
  */
 template <class T>
-vector<T> operator-=(vector<T> &v, vector<T> const &w)
+vector<T>& operator-=(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		// TODO: Throw invalid argument exception.
@@ -136,14 +135,16 @@ vector<T> operator-=(vector<T> &v, vector<T> const &w)
 	for (int i = 0; i < v.size(); ++i) {
 		v(i) -= w(i);
 	}
+
+	return v;
 }
 
 
 /*
- * Dot product.
+ * Standard dot product.
  */
 template <class T>
-T dot_product(vector<T> const &v, vector<T> const &w)
+T dot_product(const vector<T> &v, const vector<T> &w)
 {
 	if (v.size() != w.size()) {
 		// TODO: Throw invalid argument exception.

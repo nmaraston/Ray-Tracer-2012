@@ -11,37 +11,37 @@
 
 // Vector eqaulity.
 template <class T>
-bool operator==(vector<T> const &v, vector<T> const &w);
+bool operator==(const vector<T> &v, const vector<T> &w);
 
 // Scalar multiplication: s * v = v * s.
 template <class T>
-vector<T> operator*(T s, vector<T> const &v);
+vector<T> operator*(T s, const vector<T> &v);
 template <class T>
-vector<T> operator*(vector<T> const &v, T s);
+vector<T> operator*(const vector<T> &v, T s);
 
 // Scalar division: v / s.
 template <class T>
-vector<T> operator/(vector<T> const &v, T s);
+vector<T> operator/(const vector<T> &v, T s);
 
 // Vector addition: v + w.
 template <class T>
-vector<T> operator+(vector<T> const &v, vector<T> const &w);
+vector<T> operator+(const vector<T> &v, const vector<T> &w);
 
 // Vector subtraction: v - w.
 template <class T>
-vector<T> operator-(vector<T> const &v, vector<T> const &w);
+vector<T> operator-(const vector<T> &v, const vector<T> &w);
 
-// Accumulated vector addition: v += w. Returns the first argument.
+// Accumulated vector addition: v += w. Returns a reference to the first argument.
 template <class T>
-vector<T> operator+=(vector<T> &v, vector<T> const &w);
+vector<T>& operator+=(vector<T> &v, const vector<T> &w);
 
-// Accumulated vector subtraction. v += w. Returns the first argument.
+// Accumulated vector subtraction. v -= w. Returns a reference to the first argument.
 template <class T>
-vector<T> operator-=(vector<T> &v, vector<T> const &w);
+vector<T>& operator-=(vector<T> &v, const vector<T> &w);
 
 // Dot product.
 template <class T>
-T dot_product(vector<T> const &v, vector<T> const &w);
+T dot_product(const vector<T> &v, const vector<T> &w);
 
 // Include function implementations.
 #include "vector_ops.cpp"

@@ -1,18 +1,21 @@
 #include "image.h"
+#include "vector_ops.h"
 
 int main(int argc, char** argv)
 {
-	image<byte> myImage(200, 200, 3);
+	vector<double> v1(2);
+	vector<double> v2(2);
 
-	for (int i = 0; i < 200; i++) {
-		for (int j = 0; j < 200; j++) {
-			myImage(i,j,0) = 255;
-			myImage(i,j,1) = 0;
-			myImage(i,j,2) = 0;
-		}
-	}
+	v1(0) = 1;
+	v1(1) = 1;
 	
-	myImage.save_ppm("image.ppm");
+	v2(0) = 5;
+	v2(1) = 3;
+
+	int d = dot_product(v1, v2);
+	
+	std::cout << d << std::endl;
+	//std::cout << v3(0) << " " << v3(1) << std::endl;
 
 	return 0;
 }

@@ -3,42 +3,35 @@
 
 
 template <class T>
-class Vector {
+class vector {
 	
 	public:
 		
-		// Constructors.
-		
-		// Create a zero vector of the given size.
-		Vector(unsigned size = 0);
+		// Constructor. Create a zero vector of the given size.
+		vector(unsigned size = 0);
+
+		// Copy constructor.
+		vector(const vector<T> &v);
 	
 		// Destructor.
-		~Vector();
+		~vector();
 
-		
+
+		// Assignment operator.
+		inline vector<T>& operator=(const vector<T> &v);	
+	
+	
 		// Read only reference to this vectors i'th entry.
-		inline T const& operator()(unsigned i);
+		inline T const& operator()(unsigned i) const;
 		// Read/write reference to this vectors i'th entry.
 		inline T& operator()(unsigned i);
 
 
 		// Destructable resize.
-		void set_size(unsigned n);
+		inline void set_size(unsigned n);
 		
 		// Getter for dimension.
-		inline unsigned size();
-
-	
-		// Vector operations:
-
-		inline Vector<T>& operator*(T s);  // Scalar multiplication
-		inline Vector<T>& operator/(T s);  // Scalar division.
-
-		inline Vector<T>& operator+=(Vector<T> const&v);  // Scalar addition.
-		inline Vector<T>& operator-=(Vector<T> const&v);  // Scalar subtraction.
-
-		inline Vector<T> operator+(Vector<T> const &v);  // Vector addition.
-		inline Vector<T> operator-(Vector<T> const &v);  // Vector subtraction.
+		inline unsigned size() const;
 
 	private:
 
@@ -49,46 +42,20 @@ class Vector {
 		T* components_;
 
 		// Memory management.
-		void alloc_components();
-		void free_components();
+		inline void alloc_components();
+		inline void free_components();
+		void deep_copy(const vector<T> &v);
 };
 
 
-/*
- * Vector class implementation.
- */
-
-/*
- * Zero vector constructor. Allocates memory for a vector of the given size and zeros out memory.
- */
-template <class T>
-Vector<T>::Vector(unsigned size)
-	: size_(size)
-{
-	alloc_components();
-
-	for (int i = 0; i < size; ++i) {
-		(*this)(i) = 0;
-	}
-}
-
-
-/*
- * Destructor.
- */
-template <class T>
-Vector<T>::~Vector()
-{
-	free_components();
-}
-
+// Inline implementations.
 
 /*
  * Read only component access.
  */
 template <class T>
 inline
-T const& Vector<T>::operator()(unsigned i) const
+T const& vector<T>::operator()(unsigned i) const
 {
 	// TODO: Validate arguments.
 	return components_[i];
@@ -100,7 +67,7 @@ T const& Vector<T>::operator()(unsigned i) const
  */
 template <class T>
 inline
-T& Vector<T>::operator()(unsigned i)
+T& vector<T>::operator()(unsigned i)
 {
 	// TODO: Validate arguments.
 	return components_[i];
@@ -111,7 +78,8 @@ T& Vector<T>::operator()(unsigned i)
  * Destrucable resize.
  */
 template <class T>
-void Vector<T>::set_size(unsigned size)
+inline
+void vector<T>::set_size(unsigned size)
 {
 	free_components();
 	size_ = size;
@@ -124,7 +92,7 @@ void Vector<T>::set_size(unsigned size)
  */
 template <class T>
 inline
-unsigned Vector<T>size()
+unsigned vector<T>::size() const
 {
 	return size_;
 }
@@ -134,7 +102,8 @@ unsigned Vector<T>size()
  * Memory allocator for vector components.
  */
 template <class T>
-void Vector<T>::alloc_components()
+inline
+void vector<T>::alloc_components()
 {
 	components_ = new T[size_];
 }
@@ -144,11 +113,17 @@ void Vector<T>::alloc_components()
  * Memory de-allocator for vector components.
  */
 template <class T>
-void Vector<T>::free_components()
+inline
+void vector<T>::free_components()
 {
-	delete[] components_;
+	if (components_ != 0) {
+		delete[] components_;
+		components_ = 0;
+	}
 }
-	
+
+// Include the rest of the implementation for template support.
+#include "vector.cpp"
+
 
 #endif // _VECTOR_H_
-

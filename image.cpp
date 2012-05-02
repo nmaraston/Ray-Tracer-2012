@@ -3,9 +3,7 @@
 #include <fstream>
 
 
-/*
- * Image class implementation.
- */
+// Image class implementation.
 
 /*
  * Empty image constructor. Allocates memory for an image of the given size. Does NOT zero out 
