@@ -1,21 +1,20 @@
-#include "image.h"
-#include "vector_ops.h"
+#include "math/Vector.h"
+#include "math/vector_ops.h"
+//#include "Camera.h"
+//#include <iostream>
 
 int main(int argc, char** argv)
 {
-	vector<double> v1(2);
-	vector<double> v2(2);
+	/*Vector3d position(0, 0, 1);
+	Vector3d direction(0, 0, -1);
+	Vector3d up(0, 1, 0);	
 
-	v1(0) = 1;
-	v1(1) = 1;
-	
-	v2(0) = 5;
-	v2(1) = 3;
+	Camera cam(position, direction, up);
 
-	int d = dot_product(v1, v2);
-	
-	std::cout << d << std::endl;
-	//std::cout << v3(0) << " " << v3(1) << std::endl;
+	std::cout << "w: " << cam.w(0) << " " << cam.w(1) << " " << cam.w(2) << "\n";
+	std::cout << "u: " << cam.u(0) << " " << cam.u(1) << " " << cam.u(2) << "\n";
+	std::cout << "v: " << cam.v(0) << " " << cam.v(1) << " " << cam.v(2) << "\n";*/
+
 
 	return 0;
 }

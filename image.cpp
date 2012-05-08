@@ -1,4 +1,4 @@
-#include "image.h"	
+#include "Image.h"	
 #include <iostream>
 #include <fstream>
 
@@ -6,11 +6,11 @@
 // Image class implementation.
 
 /*
- * Empty image constructor. Allocates memory for an image of the given size. Does NOT zero out 
+ * Empty Image constructor. Allocates memory for an image of the given size. Does NOT zero out 
  * memory.
  */
 template <class T>
-image<T>::image(unsigned rows, unsigned columns, unsigned channels)
+Image<T>::Image(unsigned rows, unsigned columns, unsigned channels)
 	: nrows_(rows), ncols_(columns), nchans_(channels)
 {
 	alloc_pixels();
@@ -18,13 +18,13 @@ image<T>::image(unsigned rows, unsigned columns, unsigned channels)
 
 
 /*
- * Construct new image object from a image file on disk. The inheriting class is responsible for 
+ * Construct new Image object from a image file on disk. The inheriting class is responsible for 
  * how the image is loaded.
  * 
  * This is equivalent to calling: image = Image() followed by image.load(filename).
  */
 template <class T>
-image<T>::image(const char* filename)
+Image<T>::Image(const char* filename)
 	: nrows_(0), ncols_(0), nchans_(0)
 {
 	load(filename);
@@ -35,7 +35,7 @@ image<T>::image(const char* filename)
  * Destructor.
  */
 template <class T>
-image<T>::~image()
+Image<T>::~Image()
 {
 	free_pixels();
 }
@@ -45,7 +45,7 @@ image<T>::~image()
  * Destructable resize. Deallocs and reallocs.
  */
 template <class T>
-void image<T>::set_size(unsigned rows, unsigned columns, unsigned channels)
+void Image<T>::set_size(unsigned rows, unsigned columns, unsigned channels)
 {
 	free_pixels();
 	
@@ -61,7 +61,7 @@ void image<T>::set_size(unsigned rows, unsigned columns, unsigned channels)
  * Dynamically allocates memory for image.
  */
 template <class T>
-void image<T>::alloc_pixels()
+void Image<T>::alloc_pixels()
 {	
 	// Alloc rows.
 	pixels_ = new T[nrows_ * ncols_ * nchans_];
@@ -74,7 +74,7 @@ void image<T>::alloc_pixels()
  * Free memory that was previously allocated for image.
  */
 template <class T>
-void image<T>::free_pixels()
+void Image<T>::free_pixels()
 {
 	delete[] pixels_;
 
@@ -88,7 +88,7 @@ void image<T>::free_pixels()
  * for RGB images.
  */
 template <class T>
-void image<T>::save_ppm(const char* filename)
+void Image<T>::save_ppm(const char* filename)
 {
 	std::ofstream file;
 
@@ -118,9 +118,9 @@ void image<T>::save_ppm(const char* filename)
 	file << "255" << std::endl;
 
 	// Write pixel values. 
-	for (int i = 0; i < nrows_; ++i) {
-		for (int j = 0; j < ncols_; ++j) {
-			for (int c = 0; c < nchans_; ++c) {	
+	for (unsigned i = 0; i < nrows_; ++i) {
+		for (unsigned j = 0; j < ncols_; ++j) {
+			for (unsigned c = 0; c < nchans_; ++c) {	
 				file << (*this)(i,j,c);;
 			}
 		}
@@ -134,7 +134,7 @@ void image<T>::save_ppm(const char* filename)
  * Currently only supports reading PPM image format.
  */
 template <class T>
-void image<T>::load(const char* filename)
+void Image<T>::load(const char* filename)
 {
 	// TODO: Implement image loading.
 }

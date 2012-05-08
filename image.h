@@ -1,28 +1,29 @@
 #ifndef _IMAGE_H_
 #define _IMAGE_H_
 
+#include <assert.h>
 
 typedef unsigned char byte; 
 
 /* 
- * Basic image class. This class implements functionality for storing and accessing images in 
+ * Basic Image class. This class implements functionality for storing and accessing images in 
  * memory.
  */
 template <class T>
-class image {
+class Image {
 
 	public:
 	
 		// Constructors.
 	
 		// Creates an empty image of the given size. Memory is NOT zeroed out.
-		image(unsigned rows = 0, unsigned columns = 0, unsigned channels = 0);
+		Image(unsigned rows = 0, unsigned columns = 0, unsigned channels = 0);
 	
 		// Equivalent to calling: image = Image() followed by image.load(filename).
-		image(const char* filename);
+		Image(const char* filename);
 
 		// Destructor.
-		~image();
+		~Image();
 
 
 		// Read only reference to pixel at coordinate row, column in channel c.
@@ -69,9 +70,11 @@ class image {
  */
 template <class T>
 inline
-T const& image<T>::operator()(unsigned row, unsigned column, unsigned channel) const
+T const& Image<T>::operator()(unsigned row, unsigned column, unsigned channel) const
 {
-	// TODO: Validate arguments.
+	assert(row < nrows_);
+	assert(column < ncols_);
+	assert(channel < nchans_);
 	return pixels_[ nchans_ * (row * ncols_ + column) + channel ];
 }
 
@@ -81,9 +84,11 @@ T const& image<T>::operator()(unsigned row, unsigned column, unsigned channel) c
  */
 template <class T>
 inline 
-T& image<T>::operator()(unsigned row, unsigned column, unsigned channel)
+T& Image<T>::operator()(unsigned row, unsigned column, unsigned channel)
 {
-	// TODO: Validate arguments.
+	assert(row < nrows_);
+	assert(column < ncols_);
+	assert(channel < nchans_);
 	return pixels_[ nchans_ * (row * ncols_ + column) + channel ];	
 }
 
@@ -93,7 +98,7 @@ T& image<T>::operator()(unsigned row, unsigned column, unsigned channel)
  */
 template <class T>
 inline 
-unsigned image<T>::rows()
+unsigned Image<T>::rows()
 {
 	return nrows_;
 }
@@ -104,14 +109,14 @@ unsigned image<T>::rows()
  */
 template <class T>
 inline 
-unsigned image<T>::columns()
+unsigned Image<T>::columns()
 {
 	return ncols_;
 }
 
 
 // Include the rest of the image class implementation.
-#include "image.cpp"
+#include "Image.cpp"
 
 
 #endif // _IMAGE_H_
