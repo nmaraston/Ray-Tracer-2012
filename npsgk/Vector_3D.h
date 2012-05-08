@@ -3,13 +3,15 @@
 
 #include "Vector.h"
 
-class Vector3d : public Vector<double>
+class Vector_3D : public Vector<double>
 {
 	public: 
 		
 		// Constructor.
 		// A new vector of the form (a,b,c,).
-		Vector3d(double a = 0, double b = 0, double c = 0);
+		Vector_3D(double a = 0, double b = 0, double c = 0);
+
+		using Vector<double>::operator=;
 };
 	
 

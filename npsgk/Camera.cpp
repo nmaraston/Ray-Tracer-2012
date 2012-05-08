@@ -1,5 +1,6 @@
 #include "Camera.h"
-#include "math/vector_ops.h"
+#include "Vector_3D.h"
+#include "vector_ops.h"
 
 
 // Camera class implementation.
@@ -7,7 +8,7 @@
 /*
  * Constructor.
  */
-Camera::Camera(Vector3d &view_point, Vector3d &view_direction, Vector3d &up)
+Camera::Camera(Vector_3D &view_point, Vector_3D &view_direction, Vector_3D &up)
 {
 	e = view_point;
 
