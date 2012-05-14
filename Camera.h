@@ -1,23 +1,26 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
-#include "Vector_3D.h"
+
+#include "Vector.h"
+
 
 class Camera {
 	
 	public:
 		
 		// Constructor.
-		Camera(Vector_3D &view_point, Vector_3D &view_direction, Vector_3D &up);
+		Camera(Vector3d& view_point, Vector3d& view_direction, Vector3d& up);
 		
 		// Viewpoint position.
-		Vector_3D e;
+		Vector3d e;
 
 		// A right handed orthonormal basis with respect to the cameras orientation. 
 		// The view-direction is equivalent to -w.
-		Vector_3D w;
-		Vector_3D u;
-		Vector_3D v;
+		Vector3d w;
+		Vector3d u;
+		Vector3d v;
 };
+
 
 #endif // _CAMERA_H_

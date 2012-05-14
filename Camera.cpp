@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "Vector_3D.h"
+#include "Vector.h"
 #include "vector_ops.h"
 
 
@@ -8,7 +8,7 @@
 /*
  * Constructor.
  */
-Camera::Camera(Vector_3D &view_point, Vector_3D &view_direction, Vector_3D &up)
+Camera::Camera(Vector3d &view_point, Vector3d &view_direction, Vector3d &up)
 {
 	e = view_point;
 
