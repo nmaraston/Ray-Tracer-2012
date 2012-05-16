@@ -1,7 +1,8 @@
-#include "Vector.h"
-//#include "Camera.h"
-#include <iostream>
-#include "Ray.h"
+//#include "Vector.h"
+//#include <iostream>
+//#include "RGB.h"
+//#include "Material.h"
+#include "Sphere.h"
 
 int main(int argc, char** argv)
 {
@@ -17,12 +18,20 @@ int main(int argc, char** argv)
 	std::cout << "v: " << cam.v(0) << " " << cam.v(1) << " " << cam.v(2) << "\n";
 	*/
 
+	/*
 	Vector3d origin(0, 0, 0);
 	Vector3d direction(0, 0, -1);
 	
 	Ray ray(origin, direction);
 	Vector3d at = ray(4);
 	std::cout << at(0) << " " << at(1) << " " << at(2) << "\n";
+	*/
+	
+	Vector3d center(0, 0, 0);
+	Sphere sphere(center, 10);
+
+
+	
 
 	return 0;
 }
