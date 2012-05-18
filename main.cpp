@@ -1,37 +1,26 @@
-//#include "Vector.h"
-//#include <iostream>
-//#include "RGB.h"
-//#include "Material.h"
+#include <iostream>
 #include "Sphere.h"
+#include "Ray.h"
 
 int main(int argc, char** argv)
 {
-	/*
-	Vector3d position(0, 0, 1);
-	Vector3d direction(0, 0, -1);
-	Vector3d up(0, 1, 0);	
 
-	Camera cam(position, direction, up);
+	Vector3d e(0, 0, 0);
+	Vector3d d(0, 1, -1);
+	Ray ray(e, d);
 
-	std::cout << "w: " << cam.w(0) << " " << cam.w(1) << " " << cam.w(2) << "\n";
-	std::cout << "u: " << cam.u(0) << " " << cam.u(1) << " " << cam.u(2) << "\n";
-	std::cout << "v: " << cam.v(0) << " " << cam.v(1) << " " << cam.v(2) << "\n";
-	*/
+	Vector3d c(0, 0, 0);
+	Sphere sphere(c, 5);
 
-	/*
-	Vector3d origin(0, 0, 0);
-	Vector3d direction(0, 0, -1);
-	
-	Ray ray(origin, direction);
-	Vector3d at = ray(4);
-	std::cout << at(0) << " " << at(1) << " " << at(2) << "\n";
-	*/
-	
-	Vector3d center(0, 0, 0);
-	Sphere sphere(center, 10);
+	Hit_Record h;
 
-
-	
+	if (sphere.hit(ray, 0, 100, &h)) {
+		std::cout << "Hit." << std::endl;
+		std::cout << h.t << std::endl;
+		std::cout << h.point(0) << ", " << h.point(1) << ", " << h.point(2) << std::endl;
+	} else {
+		std::cout << "No hit." << std::endl;
+	}
 
 	return 0;
 }

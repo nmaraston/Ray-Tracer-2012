@@ -29,14 +29,8 @@ class Sphere : public Surface {
 		virtual Box bounding_box();
 
 	
-		// Access to radius and center.
-		Vector3d& center();
-		double radius();
-
-	private:
-	
-		Vector3d center_;
-		double radius_;	
+		Vector3d center;
+		double radius;	
 
 };
 
@@ -49,7 +43,7 @@ class Sphere : public Surface {
  */
 inline
 Sphere::Sphere(Vector3d& center, double radius)
-	: Surface(), center_(center), radius_(radius)
+	: Surface(), center(center), radius(radius)
 {}
 
 
@@ -58,7 +52,7 @@ Sphere::Sphere(Vector3d& center, double radius)
  */
 inline
 Sphere::Sphere(Vector3d& center, double radius, Material& material)
-	: Surface(material), center_(center), radius_(radius)
+	: Surface(material), center(center), radius(radius)
 {}
 
 
