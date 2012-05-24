@@ -40,9 +40,9 @@ void Renderer::render()
 
 			compute_ray_direction(&ray, i, j);
 
-			if (compute_intersection(ray, &hit_rec)) {
-				//compute_shading(hit_rec, &colour);
-				colour = hit_rec.surface->get_material()->get_kd();
+			if (compute_ray_intersection(ray, &hit_rec)) {
+				compute_surface_shading(hit_rec, &colour);
+				//colour = hit_rec.surface->get_material()->get_kd();
 			} else {
 				colour = scene->get_background_colour();
 			}
@@ -75,7 +75,7 @@ void Renderer::compute_ray_direction(Ray* ray, unsigned i, unsigned j)
  * This function computes the closest intersection point to the camera between the given ray and
  * all surfaces in the scene. 
  */
-bool Renderer::compute_intersection(const Ray& ray, HitRecord* hit_rec)
+bool Renderer::compute_ray_intersection(const Ray& ray, HitRecord* hit_rec)
 {
 	double t0 = 0;
 	double t1 = 1000;
@@ -105,9 +105,9 @@ bool Renderer::compute_intersection(const Ray& ray, HitRecord* hit_rec)
 
 
 /*
- *
+ * Currently, surface shading is computed using lambertian shading. 
  */
-void Renderer::compute_shading(const HitRecord& hit_rec, Spectrum* colour)
+void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colour)
 {
 	// Set all components to 0.
 	*colour = Spectrum::BLACK;
@@ -119,6 +119,7 @@ void Renderer::compute_shading(const HitRecord& hit_rec, Spectrum* colour)
 	Vector3d l;
 	double angle;
 
+	// Accumulate the value of the lambertian formula evaluated with each light source.
 	for (unsigned i = 0; i < scene->get_lights().size(); ++i) {
 		light = scene->get_lights()[i];
 		l = (light->origin - hit_rec.point).normalize();

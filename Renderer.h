@@ -26,8 +26,8 @@ class Renderer {
 	private:
 
 		void compute_ray_direction(Ray* ray, unsigned i, unsigned j);
-		bool compute_intersection(const Ray& ray, HitRecord* hit_rec);
-		void compute_shading(const HitRecord& hit_rec, Spectrum* colour);
+		bool compute_ray_intersection(const Ray& ray, HitRecord* hit_rec);
+		void compute_surface_shading(const HitRecord& hit_rec, Spectrum* colour);
 
 		void set_pixel(Image<byte>& output, unsigned i, unsigned j, const Spectrum& colour);
 		
