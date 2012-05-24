@@ -5,9 +5,6 @@
 #include "Vector.h"
 #include "Renderer.h"
 
-#include <iostream>
-
-
 /* 
  * Ray-tracing demo.
  */
