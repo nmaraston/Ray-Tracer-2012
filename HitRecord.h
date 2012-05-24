@@ -3,20 +3,24 @@
 
 
 #include "Vector.h"
+#include "Surface.h"
 
 
 /*
  * A hit-record is a collection of information that is filled out when a Surface class's hit method
  * detects intersection.
  */
-struct Hit_Record {
+struct HitRecord {
 
+	// A pointer to the closest surface that was hit by the ray.
+	const Surface* surface;
+	
 	// Parameter value where ray(t) intersects the surface.
 	double t;
 
-	// Point of intersection.
+	// The point of intersection.
 	Vector3d point;
-
+	
 	// The unit normal of the surface at the intersecton point.
 	Vector3d normal;
 

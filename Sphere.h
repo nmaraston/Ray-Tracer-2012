@@ -5,7 +5,6 @@
 #include "Vector.h"
 #include "Surface.h"
 #include "Ray.h"
-#include "Hit_Record.h"
 #include "Box.h"
 
 
@@ -17,14 +16,16 @@ class Sphere : public Surface {
 	public:
 	
 		// Constructors.
-		inline Sphere(Vector3d& center, double radius);
-		inline Sphere(Vector3d& center, double radius, Material& material);
+		inline Sphere(const Vector3d& center, double radius);
+		inline Sphere(const Vector3d& center, double radius, const Material* material);
 
 
 		// Hit detection.
-		virtual bool hit(Ray& ray, double t0, double t1, Hit_Record* hit_record);
+		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t);
 
-	
+		// Returns the normal to the given point on the surface.
+		virtual Vector3d normal(const Vector3d& point);
+
 		// Returns an axis-aligned bounding box for this surface.
 		virtual Box bounding_box();
 
@@ -42,8 +43,8 @@ class Sphere : public Surface {
  * Creates a Sphere with the given center and radius and default grey material.
  */
 inline
-Sphere::Sphere(Vector3d& center, double radius)
-	: Surface(), center(center), radius(radius)
+Sphere::Sphere(const Vector3d& _center, double _radius)
+	: Surface(), center(_center), radius(_radius)
 {}
 
 
@@ -51,8 +52,8 @@ Sphere::Sphere(Vector3d& center, double radius)
  * Creates a Sphere with the given center, radius and material.
  */
 inline
-Sphere::Sphere(Vector3d& center, double radius, Material& material)
-	: Surface(material), center(center), radius(radius)
+Sphere::Sphere(const Vector3d& _center, double _radius, const Material* material)
+	: Surface(material), center(_center), radius(_radius)
 {}
 
 

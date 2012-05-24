@@ -2,48 +2,65 @@
 #define _MATERIAL_H_
 
 
-#include "RGB.h"
+#include "Spectrum.h"
 
 
+// TODO: Document Material class.
+/*
+ * 
+ */
 class Material {
 
 	public:
 
 		// Consturctor. Default material is grey.
-		inline Material(const RGB& ambient = RGB::GREY, const RGB& surface = RGB::GREY);
-	
-		// Colour access:
-		inline RGB& ambient();
-		inline RGB& surface();
+		inline Material(const Spectrum& kd = Spectrum::GREY);
+		
+		
+		// ACCESSORS:
+		inline const Spectrum& get_kd() const;
+		inline void set_kd(const Spectrum& kd);
 
 	private:
-	
-		RGB ambient_;
-		RGB surface_;
+		
+		Spectrum kd_;
 
+	public:
+		
+		// Some useful materials:
+		static const Material MATTE_GREY;
 };
 
 
 // Inline implementations:
 
 
+/*
+ *
+ */
 inline 
-Material::Material(const RGB& ambient, const RGB& surface)
-	: ambient_(ambient), surface_(surface)
+Material::Material(const Spectrum& kd)
+	: kd_(kd)
 {}
 
 
+/*
+ *
+ */
 inline
-RGB& Material::ambient()
+const Spectrum& Material::get_kd() const
 {
-	return ambient_;
+	return kd_;
 }
 
 
+/*
+ *
+ */
 inline
-RGB& Material::surface()
+void Material::set_kd(const Spectrum& kd)
 {
-	return surface_;
+	kd_ = kd;
 }
 
 

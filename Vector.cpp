@@ -26,7 +26,7 @@ bool Vector<T, SIZE>::operator==(const Vector<T, SIZE>& v) const
  * Unary minus.
  */
 template <class T, unsigned SIZE>
-Vector<T, SIZE> Vector<T, SIZE>::operator-()
+Vector<T, SIZE> Vector<T, SIZE>::operator-() const
 {
 	Vector<T, SIZE> result;
 	for (unsigned i = 0; i < SIZE; ++i) {

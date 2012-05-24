@@ -4,12 +4,12 @@
 
 #include "Material.h"
 #include "Ray.h"
-#include "Hit_Record.h"
 #include "Box.h"
+#include "Spectrum.h"
 
 
 /* 
- * Abstract class surface. 
+ * Abstract surface class.
  * A surface must be able to determine if and where a given ray intersects it and must be able to
  * supply an axis-aligned bounding box.
  */
@@ -19,27 +19,27 @@ class Surface {
 
 		// Constructors:
 		inline Surface();
-		inline Surface(Material& material);
+		inline Surface(const Material* material);
 		
-		/*
- 		 * Returns true if and only if the ray intersects this surface. If intersection does occur,
-		 * the intersection information (location and normal) are written to hit_record.
- 		 */
-		virtual bool hit(Ray& ray, double t0, double t1, Hit_Record* hit_record) = 0;
 
-		/* 
-		 * Returns and axis-aligned bounding box.
- 		 */
+ 		// Returns true if and only if the ray intersects this surface. If intersection does occur,
+		// the intersection information (location and normal) are written to hit_record.
+		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t) = 0;
+
+		// Returns the normal to the given point on the sphere. Assumes the point is on the surface.
+		virtual Vector3d normal(const Vector3d& point) = 0;
+
+		// Returns and axis-aligned bounding box.
 		virtual Box bounding_box() = 0;
 
 	
 		// Material access:
-		inline Material& material();
-		inline void set_material(Material& material);
+		inline const Material* get_material() const;
+		inline void set_material(const Material* material);
 
 	private:
 
-		Material material_;
+		const Material* material_;
 
 };
 
@@ -51,15 +51,17 @@ class Surface {
  * Default constructor. Creates a surface with default grey material.
  */
 inline
-Surface::Surface() 
+Surface::Surface()
+	: material_(&Material::MATTE_GREY)
 {}
+
 
 
 /*
  * Constructs a surface with the given material.
  */ 
 inline
-Surface::Surface(Material& material)
+Surface::Surface(const Material* material)
 	: material_(material)
 {}
 
@@ -68,13 +70,13 @@ Surface::Surface(Material& material)
  * Material access.
  */
 inline 
-Material& Surface::material()
+const Material* Surface::get_material() const
 {
 	return material_;
 }
 
 inline
-void Surface::set_material(Material& material)
+void Surface::set_material(const Material* material)
 {
 	material_ = material;
 }

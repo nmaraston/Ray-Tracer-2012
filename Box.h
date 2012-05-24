@@ -33,8 +33,8 @@ class Box {
  * Constructor.
  */
 inline
-Box::Box(Vector3d& min, Vector3d& max)
-	: min(min), max(max)
+Box::Box(Vector3d& _min, Vector3d& _max)
+	: min(_min), max(_max)
 {}
 
 

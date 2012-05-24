@@ -1,9 +1,12 @@
 #ifndef _IMAGE_H_
 #define _IMAGE_H_
 
+
 #include <assert.h>
 
+
 typedef unsigned char byte; 
+
 
 /* 
  * Basic Image class. This class implements functionality for storing and accessing images in 

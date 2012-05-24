@@ -5,21 +5,28 @@
 #include "Vector.h"
 
 
+/*
+ *
+ */
 class Camera {
 	
 	public:
 		
 		// Constructor.
-		Camera(Vector3d& view_point, Vector3d& view_direction, Vector3d& up);
+		Camera(const Vector3d& origin, const Vector3d& direction, const Vector3d& up, 
+			   double focal_distance);
 		
 		// Viewpoint position.
-		Vector3d e;
+		Vector3d origin;
 
 		// A right handed orthonormal basis with respect to the cameras orientation. 
 		// The view-direction is equivalent to -w.
 		Vector3d w;
 		Vector3d u;
 		Vector3d v;
+
+		double focal_distance;
+
 };
 
 

@@ -11,8 +11,6 @@ class Vector {
 	
 	public:
 		
-		// CONSTRUCTORS:
-
 		// Default Constructor. Creates a zero vector with size SIZE.
 		inline Vector();
 	
@@ -41,14 +39,15 @@ class Vector {
 		bool operator==(const Vector<T, SIZE>& v) const;
 
 		// Unary minus. Returns new vector.
-		Vector<T, SIZE> operator-();
+		Vector<T, SIZE> operator-() const;
 		
-		// Scalar multiplication and division. Returns new vector.
+		// Scalar multiplication.
 		template <class U, unsigned S, class ST> 
 		friend Vector<U, S> operator*(const ST s, const Vector<U, S>& v);
 		template <class U, unsigned S, class ST> 
 		friend Vector<U, S> operator*(const Vector<U, S>& v, const ST s);
 
+		// Scalar division.
 		Vector<T, SIZE> operator/(const T s) const;
 
 		// Vector addition and subtraction. Returns new vector.
@@ -59,7 +58,7 @@ class Vector {
 		Vector<T, SIZE>& operator*=(const T s);
 		Vector<T, SIZE>& operator/=(const T s);
 
-		// Accumulated scalar multiplication and division. Returns *this.
+		// Accumulated vector addition and subtraction. Returns *this.
 		Vector<T, SIZE>& operator+=(const Vector<T, SIZE>& v);
 		Vector<T, SIZE>& operator-=(const Vector<T, SIZE>& v);
 
