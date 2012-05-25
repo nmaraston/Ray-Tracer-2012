@@ -5,6 +5,13 @@
 #include <assert.h>
 
 
+/*
+ * A Spectrum object represents a colour on the RGB colour spectrum. Components are stored as floats
+ * in the range [0.f, 1.f] instead of the usual unsigned integer range [0, 255]. To convert from the 
+ * latter format to the former format, simply divide the value of the components by 255.f. 
+ * Spectrum objects are also equipped with arithmetic operations to enable clean code when computing
+ * shading formulas.
+ */
 class Spectrum {
 
 	public:
@@ -134,6 +141,7 @@ Spectrum operator*(const Spectrum& col, const float s)
 inline
 Spectrum Spectrum::operator/(const float s) const
 {
+	assert(s != 0.f);
 	float inv = 1.f / s;
 	return Spectrum(r * inv, g * inv, b * inv);
 }
@@ -178,6 +186,7 @@ Spectrum& Spectrum::operator*=(const float s)
 inline
 Spectrum& Spectrum::operator/=(const float s)
 {
+	assert(s != 0.f);
 	float inv = 1.f / s;
 	r *= inv;
 	g *= inv;
