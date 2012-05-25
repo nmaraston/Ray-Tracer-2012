@@ -6,7 +6,9 @@
 
 
 /*
- *
+ * A camera model consists of an orthonormal basis at the origin of the camera. This
+ * basis is constructed with a given origin point (position of the camera), direction vector 
+ * (direction the camera is facing) and up vector to provide the camera orientation. 
  */
 class Camera {
 	
