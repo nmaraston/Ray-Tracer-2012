@@ -9,8 +9,10 @@ typedef unsigned char byte;
 
 
 /* 
- * Basic Image class. This class implements functionality for storing and accessing images in 
- * memory.
+ * Basic Image class. 
+ * This class implements functionality for storing and accessing images in memory. Image access is 
+ * offsetted from the bottom left corner. That is, pixel (0, 0) corresponds to the bottom left 
+ * corner of the image.
  */
 template <class T>
 class Image {
@@ -78,7 +80,7 @@ T const& Image<T>::operator()(unsigned row, unsigned column, unsigned channel) c
 	assert(row < nrows_);
 	assert(column < ncols_);
 	assert(channel < nchans_);
-	return pixels_[ nchans_ * (row * ncols_ + column) + channel ];
+	return pixels_[ nchans_ * ((nrows_ - row) * ncols_ + column) + channel ];
 }
 
 
@@ -92,7 +94,7 @@ T& Image<T>::operator()(unsigned row, unsigned column, unsigned channel)
 	assert(row < nrows_);
 	assert(column < ncols_);
 	assert(channel < nchans_);
-	return pixels_[ nchans_ * (row * ncols_ + column) + channel ];	
+	return pixels_[ nchans_ * ((nrows_ - row - 1) * ncols_ + column) + channel ];	
 }
 
 

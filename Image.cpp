@@ -5,6 +5,7 @@
 
 // Image class implementation.
 
+
 /*
  * Empty Image constructor. Allocates memory for an image of the given size. Does NOT zero out 
  * memory.
@@ -121,7 +122,7 @@ void Image<T>::save_ppm(const char* filename)
 	for (unsigned i = 0; i < nrows_; ++i) {
 		for (unsigned j = 0; j < ncols_; ++j) {
 			for (unsigned c = 0; c < nchans_; ++c) {	
-				file << (*this)(i,j,c);;
+				file << (*this)(nrows_ - i - 1, j, c);
 			}
 		}
 	}
