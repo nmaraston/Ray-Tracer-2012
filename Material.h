@@ -25,6 +25,7 @@ class Material {
 		
 		Spectrum kd_;
 
+
 	public:
 		
 		// Some useful materials:

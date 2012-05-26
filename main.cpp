@@ -10,11 +10,11 @@
  */
 int main(int argc, char** argv)
 {	
-	Vector3d sphere_center(0, 0, -10);
-	Sphere sphere(sphere_center, 5);
+	Vector3d sphere_center(0, 0, -14);
+	Sphere sphere(sphere_center, 8);
 
-	Vector3d light_origin(-2, 3, -1);
-	Light light(light_origin, 0.5);
+	Vector3d light_origin(2, 3, -1);
+	Light light(light_origin, 1);
 	
 	// Set up the scene with a single sphere sitting in the negative region of the z-axis.
 	Scene scene;

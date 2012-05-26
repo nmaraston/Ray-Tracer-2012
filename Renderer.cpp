@@ -8,8 +8,6 @@
 #include "Spectrum.h"
 #include "vector_ops.h"
 
-#include <iostream>
-
 
 /*
  * 
@@ -17,8 +15,8 @@
 void Renderer::render()
 {
 	
-	unsigned rows = imgpl->hres;
-	unsigned cols = imgpl->vres;
+	unsigned rows = imgpl->vres;
+	unsigned cols = imgpl->hres;
 
 	// Output image.
 	Image<byte> output(rows, cols, 3);
@@ -31,7 +29,7 @@ void Renderer::render()
 	HitRecord hit_rec;
 
 	// Used to hold computed colour values.
-	Spectrum colour(0, 0, 0);
+	Spectrum colour;
 
 
 	// Iterate through each pixel.
@@ -60,11 +58,11 @@ void Renderer::render()
  */
 void Renderer::compute_ray_direction(Ray* ray, unsigned i, unsigned j)
 {
-	double u;
 	double v;
+	double u;
  
-	u = imgpl->left + imgpl->width * (double(i) + 0.5) / imgpl->vres;
-	v = imgpl->bottom + imgpl->height * (double(j) + 0.5) / imgpl->hres;
+	v = imgpl->bottom + imgpl->height * (double(i) + 0.5) / imgpl->vres;
+	u = imgpl->left + imgpl->width * (double(j) + 0.5) / imgpl->hres;
 
 	ray->direction = ( -cam->focal_distance * cam->w ) + ( u * cam->u ) + ( v * cam->v ); 
 }
@@ -105,19 +103,19 @@ bool Renderer::compute_ray_intersection(const Ray& ray, HitRecord* hit_rec)
 
 
 /*
- * Currently, surface shading is computed using lambertian shading. 
+ * Currently, surface shading is computed using lambertian shading model.
  */
 void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colour)
 {
+	Light* light;
+	Vector3d l;
+	double angle;
+
 	// Set all components to 0.
 	*colour = Spectrum::BLACK;
 
 	// The material of the intersected surface.
 	const Material* material = hit_rec.surface->get_material();
-	
-	Light* light;
-	Vector3d l;
-	double angle;
 
 	// Accumulate the value of the lambertian formula evaluated with each light source.
 	for (unsigned i = 0; i < scene->get_lights().size(); ++i) {
