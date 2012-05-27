@@ -13,13 +13,17 @@ int main(int argc, char** argv)
 	Vector3d sphere_center(0, 0, -14);
 	Sphere sphere(sphere_center, 8);
 
-	Vector3d light_origin(2, 3, -1);
-	Light light(light_origin, 1);
+	Vector3d light1_origin(5, 5, -1);
+	Light light1(light1_origin, 1);
+
+	Vector3d light2_origin(-5, 0, -2);
+	Light light2(light2_origin, 1);
 	
 	// Set up the scene with a single sphere sitting in the negative region of the z-axis.
 	Scene scene;
 	scene.add_surface(&sphere);
-	scene.add_light(&light);
+	scene.add_light(&light1);
+	scene.add_light(&light2);
 
 	// Set up camera on the z-axis directed towards the negative region of the z-axis with a focal
 	// distance of 5.

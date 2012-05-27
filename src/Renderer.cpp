@@ -49,7 +49,7 @@ void Renderer::render()
 		}
 	}
 
-	output.save_ppm("Render.ppm");	
+	output.save_ppm("DiffuseRender.ppm");	
 }
 
 
@@ -109,6 +109,7 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 {
 	Light* light;
 	Vector3d l;
+	Vector3d h;
 	double angle;
 
 	// Set all components to 0.
@@ -120,9 +121,16 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 	// Accumulate the value of the lambertian formula evaluated with each light source.
 	for (unsigned i = 0; i < scene->get_lights().size(); ++i) {
 		light = scene->get_lights()[i];
+
+		// Compute diffuse component (Lambertian shading).
 		l = (light->origin - hit_rec.point).normalize();
 		angle = std::max(0.0, dot_product(hit_rec.normal, l));
 		*colour += material->get_kd() * light->intensity * angle;
+
+		// Compute specular component (Blinn-Phong shading).
+		h = ((cam->origin - hit_rec.point) + l).normalize();
+		angle = std::max(0.0, dot_product(hit_rec.normal, h));
+		*colour += material->get_ks() * light->intensity * pow(angle, 100);
 	}
 
 	colour->clamp();
