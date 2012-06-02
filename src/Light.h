@@ -14,12 +14,12 @@ struct Light {
 		
 		// Constructor.
 		inline Light(const Vector3d& origin, double intensity);
-
-		// Intenity of this light source.
-		double intensity;
-
+	
 		// Position of light in the coordinate system.
 		Vector3d origin;
+	
+		// Light intensity.
+		double intensity;
 
 };
 
@@ -32,7 +32,7 @@ struct Light {
  */
 inline
 Light::Light(const Vector3d& _origin, double _intensity)
-	:	intensity(_intensity), origin(_origin)
+	: origin(_origin), intensity(_intensity)
 {}
 
 

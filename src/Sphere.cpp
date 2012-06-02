@@ -1,5 +1,4 @@
 #include <math.h>
-#include <iostream>
 
 #include "Sphere.h"
 #include "Ray.h"
@@ -14,16 +13,16 @@
  * points. We solve for the smallest value t in the range [t0, t1] such that the point ray(t) 
  * intersects with the sphere.
  */
-bool Sphere::hit(const Ray &ray, double t0, double t1, double* hit_t)
+bool Sphere::hit(const Ray &ray, double t0, double t1, double* t_hit) const
 {
 	Vector3d o_c = ray.origin - center; 
 	double a = dot_product(ray.direction, ray.direction);
 	double b = dot_product(ray.direction, o_c);
 	double c = dot_product(o_c, o_c) - pow(radius, 2);
 
-	double dis = pow(b, 2) - a * c;
+	double discriminant = pow(b, 2) - a * c;
 
-	if (dis < 0) {
+	if (discriminant < 0) {
 		// No real roots. The ray does not intersect with the sphere.
 		return false;
 	}
@@ -33,9 +32,9 @@ bool Sphere::hit(const Ray &ray, double t0, double t1, double* hit_t)
 	// To compute the roots we first compute the smaller root in a manor that avoids catastrophic
 	// cancellation. Then, if necessary, compute the second root using the identity x_1 * x_2 = c/a.
 	if (b > 0) {
-		t = (-b - sqrt(dis)) / a;
+		t = (-b - sqrt(discriminant)) / a;
 	} else {
-		t = c / (-b + sqrt(dis));
+		t = c / (-b + sqrt(discriminant));
 	}
 
 	// If the smaller root does not fall in range of [t0, t1], then compute the larger root and see 
@@ -47,7 +46,7 @@ bool Sphere::hit(const Ray &ray, double t0, double t1, double* hit_t)
 		}
 	}
 
-	*hit_t = t;
+	*t_hit = t;
 
 	return true;
 }
@@ -56,7 +55,7 @@ bool Sphere::hit(const Ray &ray, double t0, double t1, double* hit_t)
 /*
  * Returns the normal to the given point on the surface. Assumes that the point is on the surface.
  */
-Vector3d Sphere::normal(const Vector3d& point)
+Vector3d Sphere::normal(const Vector3d& point) const
 {
 	return (point - center) / radius;
 }
@@ -65,7 +64,7 @@ Vector3d Sphere::normal(const Vector3d& point)
 /*
  * Returns an axis-aligned box that bounds the sphere.
  */
-Box Sphere::bounding_box()
+Box Sphere::bounding_box() const
 {
 	Vector3d min(center(0) - radius, center(1) - radius, center(2) - radius);
 	Vector3d max(center(0) + radius, center(1) + radius, center(2) + radius);

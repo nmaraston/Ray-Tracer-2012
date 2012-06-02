@@ -24,13 +24,13 @@ class Surface {
 
  		// Returns true if and only if the ray intersects this surface. If intersection does occur,
 		// the intersection information (location and normal) are written to hit_record.
-		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t) = 0;
+		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t) const = 0;
 
 		// Returns the normal to the given point on the sphere. Assumes the point is on the surface.
-		virtual Vector3d normal(const Vector3d& point) = 0;
+		virtual Vector3d normal(const Vector3d& point) const = 0;
 
 		// Returns and axis-aligned bounding box.
-		virtual Box bounding_box() = 0;
+		virtual Box bounding_box() const = 0;
 
 	
 		// Material access:

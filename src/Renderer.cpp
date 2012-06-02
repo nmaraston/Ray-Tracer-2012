@@ -10,7 +10,7 @@
 
 
 /*
- * 
+ *
  */
 void Renderer::render()
 {
@@ -49,7 +49,7 @@ void Renderer::render()
 		}
 	}
 
-	output.save_ppm("DiffuseRender.ppm");	
+	output.save_ppm("../renders/Render.ppm");	
 }
 
 
@@ -76,7 +76,7 @@ void Renderer::compute_ray_direction(Ray* ray, unsigned i, unsigned j)
 bool Renderer::compute_ray_intersection(const Ray& ray, HitRecord* hit_rec)
 {
 	double t0 = 0;
-	double t1 = 1000;
+	double t1 = 1000; // TODO: Change to +inf. 
 	double t_hit;
 	bool hit_flag = false;
 
@@ -95,7 +95,7 @@ bool Renderer::compute_ray_intersection(const Ray& ray, HitRecord* hit_rec)
 	if (hit_flag) {
 		hit_rec->t = t1;
 		hit_rec->point = ray.origin + t1 * ray.direction;
-		hit_rec->normal = surface->normal(hit_rec->point);
+		hit_rec->normal = hit_rec->surface->normal(hit_rec->point);
 	}
 	
 	return hit_flag;
@@ -110,6 +110,7 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 	Light* light;
 	Vector3d l;
 	Vector3d h;
+	Vector3d v;
 	double angle;
 
 	// Set all components to 0.
@@ -118,17 +119,21 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 	// The material of the intersected surface.
 	const Material* material = hit_rec.surface->get_material();
 
+	// Add ambient light.
+	*colour += material->get_ka() * 0.2;
+
 	// Accumulate the value of the lambertian formula evaluated with each light source.
 	for (unsigned i = 0; i < scene->get_lights().size(); ++i) {
 		light = scene->get_lights()[i];
 
-		// Compute diffuse component (Lambertian shading).
+		// Compute diffuse component.
 		l = (light->origin - hit_rec.point).normalize();
 		angle = std::max(0.0, dot_product(hit_rec.normal, l));
-		*colour += material->get_kd() * light->intensity * angle;
+	    *colour += material->get_kd() * light->intensity * angle;
 
-		// Compute specular component (Blinn-Phong shading).
-		h = ((cam->origin - hit_rec.point) + l).normalize();
+		// Compute specular component.
+	    v = (cam->origin - hit_rec.point).normalize();
+		h = (v + l).normalize();
 		angle = std::max(0.0, dot_product(hit_rec.normal, h));
 		*colour += material->get_ks() * light->intensity * pow(angle, 100);
 	}

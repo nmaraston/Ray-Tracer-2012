@@ -21,13 +21,13 @@ class Sphere : public Surface {
 
 
 		// Hit detection.
-		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t);
+		virtual bool hit(const Ray& ray, double t0, double t1, double* hit_t) const;
 
 		// Returns the normal to the given point on the surface.
-		virtual Vector3d normal(const Vector3d& point);
+		virtual Vector3d normal(const Vector3d& point) const;
 
 		// Returns an axis-aligned bounding box for this surface.
-		virtual Box bounding_box();
+		virtual Box bounding_box() const;
 
 	
 		Vector3d center;

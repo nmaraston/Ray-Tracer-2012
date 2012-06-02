@@ -1,4 +1,4 @@
 #include "Material.h"
 
 // Definition of helper materials:
-const Material Material::MATTE_GREY(Spectrum::GREY, Spectrum::GREY);
+const Material Material::MATTE_GREY(Spectrum::GREY, Spectrum::GREY, Spectrum::GREY);

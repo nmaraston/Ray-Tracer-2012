@@ -14,7 +14,9 @@ class Material {
 	public:
 
 		// Consturctor. Default material is grey.
-		inline Material(const Spectrum& kd = Spectrum::GREY, const Spectrum& ks = Spectrum::GREY);
+		inline Material(const Spectrum& kd = Spectrum::GREY, 
+						const Spectrum& ks = Spectrum::GREY,
+						const Spectrum& ka = Spectrum::GREY);
 		
 		
 		// ACCESSORS:
@@ -24,11 +26,14 @@ class Material {
 		inline const Spectrum& get_ks() const;
 		inline void set_ks(const Spectrum& ks);
 
+		inline const Spectrum& get_ka() const;
+		inline void set_ka(const Spectrum& ka);
+
 	private:
 		
 		Spectrum kd_;
 		Spectrum ks_;
-
+		Spectrum ka_;
 
 	public:
 		
@@ -44,8 +49,8 @@ class Material {
  *
  */
 inline 
-Material::Material(const Spectrum& kd, const Spectrum& ks)
-	: kd_(kd), ks_(ks)
+Material::Material(const Spectrum& kd, const Spectrum& ks, const Spectrum& ka)
+	: kd_(kd), ks_(ks), ka_(ka)
 {}
 
 
@@ -86,6 +91,26 @@ inline
 void Material::set_ks(const Spectrum& ks)
 {
 	ks_ = ks;
+}
+
+
+/*
+ *
+ */
+inline
+const Spectrum& Material::get_ka() const
+{
+	return ka_;
+}
+
+
+/*
+ *
+ */
+inline 
+void Material::set_ka(const Spectrum& ka)
+{
+	ka_ = ka;
 }
 
 
