@@ -1,6 +1,6 @@
 #include "Camera.h"
 #include "Vector.h"
-#include "vector_ops.h"
+#include "VectorOps.h"
 
 
 /*

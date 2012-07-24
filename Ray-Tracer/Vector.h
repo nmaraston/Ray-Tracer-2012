@@ -207,7 +207,7 @@ T Vector<T, SIZE>::magnitude()
 
 
 // Including the rest of the Vector implementation for template support.
-#include "Vector.cpp"
+#include "VectorImp.h"
 
 
 // Some helper types.

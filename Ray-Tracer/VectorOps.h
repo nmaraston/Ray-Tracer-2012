@@ -15,6 +15,6 @@ template <class T, unsigned SIZE>
 Vector<T, SIZE> cross_product(const Vector<T, SIZE>& v, const Vector<T, SIZE>& w);
 
 // Include function implementations.
-#include "vector_ops.cpp"
+#include "VectorOpsIMp.h"
 
 #endif // _VECTOR_OPS_H_

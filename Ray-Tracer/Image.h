@@ -121,7 +121,7 @@ unsigned Image<T>::columns()
 
 
 // Include the rest of the image class implementation.
-#include "Image.cpp"
+#include "ImageImp.h"
 
 
 #endif // _IMAGE_H_

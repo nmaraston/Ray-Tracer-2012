@@ -6,7 +6,7 @@
 #include "Scene.h"
 #include "HitRecord.h"
 #include "Spectrum.h"
-#include "vector_ops.h"
+#include "VectorOps.h"
 
 
 /*
@@ -49,7 +49,7 @@ void Renderer::render()
 		}
 	}
 
-	output.save_ppm("../renders/Render.ppm");	
+	output.save_ppm("/Users/Nick/Render.ppm"); 	
 }
 
 
@@ -69,9 +69,9 @@ void Renderer::compute_ray_direction(Ray* ray, unsigned i, unsigned j)
 	
 
 /*
- * The main intersection routine thats called on each iteration of the ray tracing procedure. 
- * This function computes the closest intersection point to the camera between the given ray and
- * all surfaces in the scene. 
+ * The main intersection routine thats called on each iteration of the ray 
+ * tracing procedure. This function computes the closest intersection point to 
+ * the camera between the given ray and all surfaces in the scene. 
  */
 bool Renderer::compute_ray_intersection(const Ray& ray, HitRecord* hit_rec)
 {
@@ -119,10 +119,11 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 	// The material of the intersected surface.
 	const Material* material = hit_rec.surface->get_material();
 
-	// Add ambient light.
+	// Ambient light.
 	*colour += material->get_ka() * 0.2;
 
-	// Accumulate the value of the lambertian formula evaluated with each light source.
+	// Accumulate the value of the lambertian formula evaluated with each light 
+    // source.
 	for (unsigned i = 0; i < scene->get_lights().size(); ++i) {
 		light = scene->get_lights()[i];
 
@@ -143,8 +144,8 @@ void Renderer::compute_surface_shading(const HitRecord& hit_rec, Spectrum* colou
 
 
 /*
- * Helper function for ray tracing algorithm. Sets the colour of image output at pixel 
- * position (i,j).
+ * Helper function for ray tracing algorithm. Sets the colour of image output at 
+ * pixel position (i,j).
  */
 inline
 void Renderer::set_pixel(Image<byte>& output, unsigned i, unsigned j, const Spectrum& colour)

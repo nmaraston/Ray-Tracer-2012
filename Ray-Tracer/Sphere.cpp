@@ -2,7 +2,7 @@
 
 #include "Sphere.h"
 #include "Ray.h"
-#include "vector_ops.h"
+#include "VectorOps.h"
 
 
 /*

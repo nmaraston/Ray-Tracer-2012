@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  Ray Tracer
-//
-//  Created by Nick Maraston on 12-07-23.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "AppDelegate.h"
 
 #include "Scene.h"
@@ -47,7 +39,7 @@
     // the z-axis.
 	Scene scene;
     scene.add_surface(&sphere1);
-	scene.add_surface(&sphere2);
+	//scene.add_surface(&sphere2);
 	scene.add_light(&light1);
     
 	// Set up camera on the z-axis directed towards the negative region of the 
