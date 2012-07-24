@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Ray-Tracer' target in the 'Ray-Tracer' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
