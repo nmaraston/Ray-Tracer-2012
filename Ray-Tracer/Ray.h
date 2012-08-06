@@ -6,8 +6,8 @@
 
 
 /*
- * A ray is line emanating from the eye of the camera. Mathematically, we model this with a
- * parameteric equation of a line.
+ * A ray is line emanating from the eye of the camera. Mathematically, we model 
+ * this with a parameteric equation of a line.
  */
 struct Ray {
 

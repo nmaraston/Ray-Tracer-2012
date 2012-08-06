@@ -18,6 +18,8 @@
 		01376A5A15BE503400305D99 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01376A4E15BE503400305D99 /* Renderer.cpp */; };
 		01376A5B15BE503400305D99 /* Spectrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01376A5115BE503400305D99 /* Spectrum.cpp */; };
 		01376A5C15BE503400305D99 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01376A5315BE503400305D99 /* Sphere.cpp */; };
+		01F2F89815C466AE00F17AD6 /* Viewport.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F2F89715C466AE00F17AD6 /* Viewport.m */; };
+		01F2F89E15C47F8000F17AD6 /* ViewportController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01F2F89D15C47F8000F17AD6 /* ViewportController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,11 @@
 		01376A5715BE503400305D99 /* VectorOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorOps.h; sourceTree = "<group>"; };
 		01376A5815BE503400305D99 /* VectorImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorImp.h; sourceTree = "<group>"; };
 		01376A5915BE503400305D99 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		01CAC8D715CF0529009B3E55 /* RenderSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderSystem.h; sourceTree = "<group>"; };
+		01F2F89615C466AE00F17AD6 /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viewport.h; sourceTree = "<group>"; };
+		01F2F89715C466AE00F17AD6 /* Viewport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Viewport.m; sourceTree = "<group>"; };
+		01F2F89C15C47F8000F17AD6 /* ViewportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewportController.h; sourceTree = "<group>"; };
+		01F2F89D15C47F8000F17AD6 /* ViewportController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewportController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0109E35F15C3ABB100419FE5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01F2F89615C466AE00F17AD6 /* Viewport.h */,
+				01F2F89715C466AE00F17AD6 /* Viewport.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		01376A0F15BE4EA800305D99 = {
 			isa = PBXGroup;
 			children = (
@@ -111,12 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				01376A6215BF02F900305D99 /* Utils */,
-				01376A6115BF02BB00305D99 /* Renderer */,
-				01376A6015BF029800305D99 /* Geometry */,
+				01F2F8A215C487C000F17AD6 /* Renderer */,
+				01F2F8A115C4870600F17AD6 /* Cocoa */,
 				01376A5F15BF028000305D99 /* Math */,
-				01376A3015BE4EA800305D99 /* AppDelegate.h */,
-				01376A3115BE4EA800305D99 /* AppDelegate.mm */,
-				01376A3315BE4EA800305D99 /* MainMenu.xib */,
+				01F2F8A015C4869D00F17AD6 /* Modeling */,
 				01376A2515BE4EA800305D99 /* Supporting Files */,
 			);
 			path = "Ray-Tracer";
@@ -156,26 +170,6 @@
 			name = Geometry;
 			sourceTree = "<group>";
 		};
-		01376A6115BF02BB00305D99 /* Renderer */ = {
-			isa = PBXGroup;
-			children = (
-				01376A4E15BE503400305D99 /* Renderer.cpp */,
-				01376A4F15BE503400305D99 /* Renderer.h */,
-				01376A5015BE503400305D99 /* Scene.h */,
-				01376A5115BE503400305D99 /* Spectrum.cpp */,
-				01376A5215BE503400305D99 /* Spectrum.h */,
-				01376A5515BE503400305D99 /* Surface.h */,
-				01376A4A15BE502B00305D99 /* Material.cpp */,
-				01376A4B15BE502B00305D99 /* Material.h */,
-				01376A4715BE502200305D99 /* Camera.cpp */,
-				01376A4815BE502200305D99 /* Camera.h */,
-				01376A3F15BE501900305D99 /* HitRecord.h */,
-				01376A4215BE501900305D99 /* ImagePlane.h */,
-				01376A4315BE501900305D99 /* Light.h */,
-			);
-			name = Renderer;
-			sourceTree = "<group>";
-		};
 		01376A6215BF02F900305D99 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +177,64 @@
 				01376A4115BE501900305D99 /* Image.h */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		01F2F89A15C466CA00F17AD6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01F2F89C15C47F8000F17AD6 /* ViewportController.h */,
+				01F2F89D15C47F8000F17AD6 /* ViewportController.mm */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		01F2F8A015C4869D00F17AD6 /* Modeling */ = {
+			isa = PBXGroup;
+			children = (
+				01376A4315BE501900305D99 /* Light.h */,
+				01376A5015BE503400305D99 /* Scene.h */,
+				01376A5115BE503400305D99 /* Spectrum.cpp */,
+				01376A5215BE503400305D99 /* Spectrum.h */,
+				01376A4815BE502200305D99 /* Camera.h */,
+				01376A4715BE502200305D99 /* Camera.cpp */,
+				01376A4B15BE502B00305D99 /* Material.h */,
+				01376A4A15BE502B00305D99 /* Material.cpp */,
+			);
+			name = Modeling;
+			sourceTree = "<group>";
+		};
+		01F2F8A115C4870600F17AD6 /* Cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				01376A3015BE4EA800305D99 /* AppDelegate.h */,
+				01376A3115BE4EA800305D99 /* AppDelegate.mm */,
+				01376A3315BE4EA800305D99 /* MainMenu.xib */,
+				0109E35F15C3ABB100419FE5 /* Views */,
+				01F2F89A15C466CA00F17AD6 /* Controllers */,
+			);
+			name = Cocoa;
+			sourceTree = "<group>";
+		};
+		01F2F8A215C487C000F17AD6 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				01376A6015BF029800305D99 /* Geometry */,
+				01F2F8A315C487EB00F17AD6 /* RayTracer */,
+				01CAC8D715CF0529009B3E55 /* RenderSystem.h */,
+			);
+			name = Renderer;
+			sourceTree = "<group>";
+		};
+		01F2F8A315C487EB00F17AD6 /* RayTracer */ = {
+			isa = PBXGroup;
+			children = (
+				01376A4E15BE503400305D99 /* Renderer.cpp */,
+				01376A4F15BE503400305D99 /* Renderer.h */,
+				01376A5515BE503400305D99 /* Surface.h */,
+				01376A3F15BE501900305D99 /* HitRecord.h */,
+				01376A4215BE501900305D99 /* ImagePlane.h */,
+			);
+			name = RayTracer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,7 +263,7 @@
 		01376A1115BE4EA800305D99 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 01376A1415BE4EA800305D99 /* Build configuration list for PBXProject "Ray-Tracer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -255,6 +307,8 @@
 				01376A5A15BE503400305D99 /* Renderer.cpp in Sources */,
 				01376A5B15BE503400305D99 /* Spectrum.cpp in Sources */,
 				01376A5C15BE503400305D99 /* Sphere.cpp in Sources */,
+				01F2F89815C466AE00F17AD6 /* Viewport.m in Sources */,
+				01F2F89E15C47F8000F17AD6 /* ViewportController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +390,7 @@
 		01376A3915BE4EA800305D99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ray-Tracer/Ray-Tracer-Prefix.pch";
 				INFOPLIST_FILE = "Ray-Tracer/Ray-Tracer-Info.plist";
@@ -347,6 +402,7 @@
 		01376A3A15BE4EA800305D99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ray-Tracer/Ray-Tracer-Prefix.pch";
 				INFOPLIST_FILE = "Ray-Tracer/Ray-Tracer-Info.plist";
