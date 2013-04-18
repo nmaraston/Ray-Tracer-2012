@@ -49,7 +49,7 @@ void Renderer::render()
 		}
 	}
 
-	output.save_ppm("/Users/Nick/Render.ppm"); 	
+	output.save_ppm("Render.ppm"); 	
 }
 
 
